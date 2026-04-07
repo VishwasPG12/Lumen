@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Link = require('../models/Link'); 
 const axios = require('axios');
-const auth = require('../middleware/auth'); // THE SECURITY GUARD
+const auth = require('../middleware/auth'); 
 
-// Helper for rate limiting/retries
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 // @route   POST /api/links/analyze
@@ -53,9 +52,8 @@ router.post('/analyze', auth, async (req, res) => {
 
         const aiData = JSON.parse(response.data.choices[0].message.content);
 
-        // ATTACH THE USER ID HERE
         const newLink = new Link({
-            user: req.user.id, // Comes from the JWT middleware
+            user: req.user.id, 
             url,
             title: aiData.title || aiData.hashtags[0],
             summary: aiData.summary,
@@ -91,7 +89,6 @@ router.delete('/:id', auth, async (req, res) => {
         
         if (!link) return res.status(404).json({ message: "Link not found" });
 
-        // Security Check: Does this link belong to the person asking to delete it?
         if (link.user.toString() !== req.user.id) {
             return res.status(401).json({ message: "Not authorized to delete this" });
         }

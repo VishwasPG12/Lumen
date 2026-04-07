@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
-        req.user = decoded; // This adds the user ID to every request (req.user.id)
+        req.user = decoded; 
         next();
     } catch (err) {
         res.status(401).json({ message: "Token is not valid" });

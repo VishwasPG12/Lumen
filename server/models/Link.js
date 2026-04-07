@@ -18,7 +18,7 @@ const LinkSchema = new mongoose.Schema({
         default: "",
     },
     tags: {
-        type: [String], // An array of strings like ["#AI", "#Tech"]
+        type: [String], 
         default: [],
     },
     category: {
