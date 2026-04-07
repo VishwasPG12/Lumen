@@ -3,12 +3,12 @@ import { Toaster } from 'react-hot-toast';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Auth from './pages/Auth';
-import Profile from './pages/Profile'; // Ensure you create this file
+import Profile from './pages/Profile'; 
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [showAddModal, setShowAddModal] = useState(false);
-  const [view, setView] = useState('home'); // 'home' or 'profile'
+  const [view, setView] = useState('home'); 
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -43,7 +43,7 @@ function App() {
           <Navbar 
             onAddClick={() => { setView('home'); setShowAddModal(true); }} 
             onLogout={handleLogout} 
-            onProfileClick={() => setView('profile')} // This is the missing link!
+            onProfileClick={() => setView('profile')} 
           />
           
           <main className="max-w-7xl mx-auto p-6">

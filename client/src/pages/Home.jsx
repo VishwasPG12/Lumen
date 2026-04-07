@@ -25,7 +25,6 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('All');
   
-  // NEW: State for the expanded card
   const [selectedLink, setSelectedLink] = useState(null);
 
   const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
@@ -68,7 +67,7 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
   };
 
   const handleDelete = async (e, id) => {
-    e.stopPropagation(); // Prevents the card from opening when clicking delete
+    e.stopPropagation(); 
     if (!window.confirm("Permanently delete this insight?")) return;
     try {
       await api.delete(`/links/${id}`);
@@ -81,7 +80,7 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
   };
 
   const copyToClipboard = (e, text) => {
-    e.stopPropagation(); // Prevents the card from opening
+    e.stopPropagation(); 
     navigator.clipboard.writeText(text);
     toast.success("URL copied");
   };
@@ -98,7 +97,6 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
 
   return (
     <div className="py-8">
-      {/* Search and Category Pills */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
         <div className="relative w-full max-w-md group">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 group-focus-within:text-purple-400 transition-colors" />
@@ -128,7 +126,6 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
         </div>
       </div>
 
-      {/* Grid Feed */}
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 opacity-40">
           <Loader2 className="w-10 h-10 animate-spin text-purple-500 mb-4" />
@@ -189,7 +186,6 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
         </div>
       )}
 
-      {/* --- ADD MODAL OVERLAY --- */}
       {showAddModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-6 backdrop-blur-xl bg-black/60">
           <div className="bg-[#121214] border border-white/10 w-full max-w-lg rounded-[3rem] p-12 shadow-2xl relative animate-in fade-in zoom-in duration-300">
@@ -210,14 +206,12 @@ const Home = ({ token, showAddModal, setShowAddModal }) => {
         </div>
       )}
 
-      {/* --- DETAIL MODAL OVERLAY (EXPANDED CARD) --- */}
       {selectedLink && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 backdrop-blur-2xl bg-black/70 overflow-y-auto" onClick={() => setSelectedLink(null)}>
           <div 
             className="bg-[#121214] border border-white/10 w-full max-w-2xl rounded-[2.5rem] shadow-2xl relative animate-in fade-in zoom-in duration-300 overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Header Image/Gradient Area */}
             <div className="h-32 bg-gradient-to-br from-purple-900/40 to-blue-900/40 border-b border-white/5 flex items-center px-10">
                <div className="px-4 py-1.5 bg-purple-500 text-white text-[10px] font-black uppercase tracking-widest rounded-full">
                  {selectedLink.category}

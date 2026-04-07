@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { Link2, Sparkles } from 'lucide-react';
-import axios from 'axios'; // 1. Import Axios
+import axios from 'axios'; 
 
 const AddLink = () => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
     const [url, setUrl] = useState('');
-    const [loading, setLoading] = useState(false); // Add a loading state
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!url) return toast.error("Please paste a URL first!");
 
-        setLoading(true); // Disable the button while AI is thinking
+        setLoading(true);
         const toastId = toast.loading('Lumen is analyzing with Gemini...');
 
         try {
-            // 2. Make the ACTUAL request to your backend
+           
             const response = await axios.post(`${API_URL}/api/links/analyze`, {
                 url: url
             });
@@ -25,7 +25,7 @@ const AddLink = () => {
             console.log("Success:", response.data);
 
             toast.success('Link saved and tagged!', { id: toastId });
-            setUrl(''); // Clear input
+            setUrl(''); 
         } catch (error) {
             console.error("Axios Error:", error);
             toast.error(error.response?.data?.message || 'Something went wrong', { id: toastId });
@@ -52,7 +52,7 @@ const AddLink = () => {
                             className="w-full bg-slate-950 border border-slate-800 rounded-xl py-3 pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-sky-500 transition-all"
                             value={url}
                             onChange={(e) => setUrl(e.target.value)}
-                            disabled={loading} // Prevent typing while loading
+                            disabled={loading} 
                         />
                     </div>
 

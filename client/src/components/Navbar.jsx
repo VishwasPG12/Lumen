@@ -21,7 +21,6 @@ const Navbar = ({ onAddClick, onLogout, onProfileClick }) => {
         </div>
 
         <div className="flex items-center gap-4">
-          {/* USER PROFILE - Now Clickable */}
           <div 
             onClick={onProfileClick}
             className="flex items-center gap-2 px-4 py-2 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 hover:border-purple-500/30 transition-all cursor-pointer group"

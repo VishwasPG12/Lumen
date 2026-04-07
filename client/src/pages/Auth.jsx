@@ -5,7 +5,7 @@ import { Sparkles, Mail, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 
 const Auth = ({ onLoginSuccess }) => {
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
-    const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Register
+    const [isLogin, setIsLogin] = useState(true); 
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         username: '',
@@ -21,13 +21,11 @@ const Auth = ({ onLoginSuccess }) => {
         try {
             const { data } = await axios.post(`${API_URL}${endpoint}`, formData);
 
-            // Save Token and User info
             localStorage.setItem('token', data.token);
             localStorage.setItem('user', JSON.stringify(data.user));
 
             toast.success(isLogin ? `Welcome back, ${data.user.username}!` : "Account created successfully!");
 
-            // Tell App.jsx we are logged in
             onLoginSuccess(data.token);
         } catch (err) {
             toast.error(err.response?.data?.message || "Authentication failed");
@@ -39,7 +37,6 @@ const Auth = ({ onLoginSuccess }) => {
     return (
         <div className="min-h-screen bg-[#0a0a0c] flex items-center justify-center p-6">
             <div className="w-full max-w-md">
-                {/* Logo Section */}
                 <div className="flex flex-col items-center mb-10">
                     <div className="w-16 h-16 bg-gradient-to-tr from-purple-600 to-blue-500 rounded-2xl flex items-center justify-center shadow-2xl shadow-purple-500/20 mb-4">
                         <Sparkles className="text-white w-8 h-8" />
@@ -48,7 +45,6 @@ const Auth = ({ onLoginSuccess }) => {
                     <p className="text-slate-500 mt-2 text-center">Your AI-Powered Knowledge Vault</p>
                 </div>
 
-                {/* Auth Card */}
                 <div className="bg-white/[0.03] border border-white/10 p-8 rounded-[2.5rem] backdrop-blur-xl shadow-2xl">
                     <h2 className="text-2xl font-bold mb-6 text-center">
                         {isLogin ? "Welcome Back" : "Create Account"}
@@ -104,7 +100,6 @@ const Auth = ({ onLoginSuccess }) => {
                         </button>
                     </form>
 
-                    {/* Toggle Button */}
                     <button
                         onClick={() => setIsLogin(!isLogin)}
                         className="w-full mt-6 text-sm text-slate-500 hover:text-purple-400 transition-colors"
