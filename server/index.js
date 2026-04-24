@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+dotenv.config();
+
 const mongoose = require('mongoose'); // 1. Import Mongoose
 const linkRoutes = require('./routes/linkRoutes');
 const authRoutes = require('./routes/authRoutes');
 
-dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
